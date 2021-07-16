@@ -133,6 +133,11 @@ Type: `String`
 Default value: path.relative(path.dirname(options.cssOutput), options.fontsOutput);    
 Font url path in `cssOutput` file.
 
+#### `success`
+Type: `Function`    
+Default value: undefined    
+Iconfonts be created.
+
     
 ## Please refer to:    
 https://www.npmjs.com/package/svgicons2svgfont    
