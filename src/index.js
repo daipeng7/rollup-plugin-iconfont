@@ -21,26 +21,19 @@ module.exports = function rollupPluginIconfont(options = {}) {
 			throw new Error(`Require '${r}' option`);
 		}
 	}
-
 	options = Object.assign({}, options);
-
-	const build = callback => {
+	const build = (callback) => {
 		return nodify(
-			generate
-				.byGlobby(options)
-				.then(result => {
-					return writeFiles(result);
-				})
-				.then(ret => {
-					console.log('iconfont + css have been built with ' + ret.glyphDatas.length + ' svg-icons.');
-					options.success && options.success();
-					return ret;
-				})
-				.catch(console.error.bind(console)),
+			generate.byGlobby(options).then(result => {
+				return writeFiles(result);
+			}).then(ret => {
+				console.log('iconfont + css have been built with ' + ret.glyphDatas.length + ' svg-icons.');
+				options.success && options.success();
+				return ret;
+			}).catch(console.error.bind(console)),
 			error => callback && callback(error)
 		);
 	};
-
 	const watch = () => {
 		if (process.env.NODE_ENV !== 'production') {
 			let watchers1;
@@ -78,7 +71,6 @@ module.exports = function rollupPluginIconfont(options = {}) {
 			});
 		}
 	};
-
 	return {
 		name: 'rollupPluginIconfont',
 		buildStart() {
