@@ -27,15 +27,20 @@ var IconfontWebpackPlugin = require('@daipeng7/rollup-plugin-iconfont');
 var path = require('path');
 var dir = 'test/web_project/'
 var options = {
-  svgs: path.join(dir, 'svgs/*.svg'),
+  // 字体图标输入路径
   svgs: resolve('src/assets/svgs/*.svg'),
+  // 字体图标输出路径
   fontsOutput: resolve('src/style/iconfont/fonts'),
+  // css文件输出路径
   cssOutput: resolve('src/style/iconfont/index.css'),
+  // 字体名
   fontName: 'custom-iconfont',
   jsOutput: false,
   htmlOutput: false,
   template: 'scss',
-  cssFontPath: 'style/iconfont/fonts',
+  // font加载绝对路径，如果不设置，会自动根据cssOutput和fontsOutput计算相对路径
+  // cssFontPath: '',
+  // 字体图标名前缀
   cssPrefix: 'ift',
 };
 
