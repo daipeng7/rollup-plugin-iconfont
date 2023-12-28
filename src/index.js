@@ -1,8 +1,8 @@
 /*
  * @Author: daipeng7
  * @Date: 2021-07-15 17:01:59
- * @LastEditTime: 2021-07-15 17:29:18
- * @LastEditors: daipeng7
+ * @LastEditTime: 2023-12-28 16:06:38
+ * @LastEditors: DaiPeng
  * @Description: iconfont rollup plugin
  */
 const nodify = require('nodeify');
@@ -63,7 +63,9 @@ module.exports = function rollupPluginIconfont(options = {}) {
 	return {
 		name: 'rollupPluginIconfont',
 		buildStart() {
-			return build().finally(watch);
+			return build().then(() => {
+				options.watch && watch();
+			});
 		}
 	};
 };
