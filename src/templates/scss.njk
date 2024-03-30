@@ -1,7 +1,7 @@
 @font-face {
-    font-family: {{ fontName }};
+    font-family: {{ options.fontFamily }};
     {% if formats.indexOf('eot')>-1 -%}
-        src: url("{{ cssFontPath }}{{ fontName }}.eot");
+        src: url("{{ cssFontPath }}{{ options.fontFamily }}.eot");
     {%- endif -%}
     {%- set eotIndex = formats.indexOf('eot') -%}
     {%- set woff2Index = formats.indexOf('woff2') -%}
@@ -10,38 +10,38 @@
     {%- set svgIndex = formats.indexOf('svg') -%}
 
     src: {% if eotIndex != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.eot?{{ fileMark }}#iefix") format("embedded-opentype")
+            url("{{ cssFontPath }}{{ options.fontFamily }}.eot?{{ fileMark }}#iefix") format("embedded-opentype")
             {%- set nothing = formats.splice(eotIndex, 1) -%}
             {%- if formats.length != 0 -%},
              {% else -%}; {% endif -%}
         {%- endif -%}
         {%- if woff2Index != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.woff2?{{ fileMark }}") format("woff2")
+            url("{{ cssFontPath }}{{ options.fontFamily }}.woff2?{{ fileMark }}") format("woff2")
             {%- set nothing = formats.splice(woff2Index, 1) -%}
             {%- if formats.length != 0 -%},
              {% else -%}; {% endif -%}
         {%- endif -%}
         {%- if woffIndex != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.woff?{{ fileMark }}") format("woff")
+            url("{{ cssFontPath }}{{ options.fontFamily }}.woff?{{ fileMark }}") format("woff")
             {%- set nothing = formats.splice(woffIndex, 1) -%}
             {%- if formats.length != 0 -%},
              {% else -%}; {% endif -%}
         {%- endif -%}
         {%- if ttfIndex != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.ttf?{{ fileMark }}") format("truetype")
+            url("{{ cssFontPath }}{{ options.fontFamily }}.ttf?{{ fileMark }}") format("truetype")
             {%- set nothing = formats.splice(ttfIndex, 1) -%}
             {%- if formats.length != 0 -%},
              {% else -%}; {% endif -%}
         {%- endif -%}
         {%- if svgIndex != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.svg?{{ fileMark }}#{{ fontName }}") format("svg");
+            url("{{ cssFontPath }}{{ options.fontFamily }}.svg?{{ fileMark }}#{{ options.fontFamily }}") format("svg");
         {%- endif %}
     font-weight: normal;
     font-style: normal;
 }
 
 [class^="{{ cssPrefix }}"], [class*=" {{ cssPrefix }}"] {
-    font-family: '{{ fontName }}';
+    font-family: '{{ options.fontFamily }}';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-style: normal;
@@ -49,7 +49,7 @@
 
 {% if clsList.length > 0 %}
 {{ clsList | join(', ') }} {
-    font-family: '{{ fontName }}';
+    font-family: '{{ options.fontFamily }}';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-style: normal;

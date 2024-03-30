@@ -1,11 +1,11 @@
 {% for glyph in glyphs
-%}${{ fontName }}-{{ glyph.name }}: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
+%}${{ options.fontFamily }}-{{ glyph.name }}: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
 {% endfor %}
 
 @font-face {
-    font-family: {{ fontName }};
+    font-family: {{ options.fontFamily }};
     {% if formats.indexOf('eot')>-1 -%}
-        src: url("{{ cssFontPath }}{{ fontName }}.eot");
+        src: url("{{ cssFontPath }}{{ options.fontFamily }}.eot");
     {%- endif -%}
     {%- set eotIndex = formats.indexOf('eot') -%}
     {%- set woff2Index = formats.indexOf('woff2') -%}
@@ -13,37 +13,37 @@
     {%- set ttfIndex = formats.indexOf('ttf') -%}
     {%- set svgIndex = formats.indexOf('svg') %}
     src: {% if eotIndex != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.eot?#iefix") format("embedded-opentype")
+            url("{{ cssFontPath }}{{ options.fontFamily }}.eot?#iefix") format("embedded-opentype")
             {%- set nothing = formats.splice(eotIndex, 1) -%}
             {%- if formats.length != 0 -%}, {% else -%}; {% endif -%}
         {%- endif -%}
         {%- if woff2Index != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.woff2") format("woff2")
+            url("{{ cssFontPath }}{{ options.fontFamily }}.woff2") format("woff2")
             {%- set nothing = formats.splice(woff2Index, 1) -%}
             {%- if formats.length != 0 -%}, {% else -%}; {% endif -%}
         {%- endif -%}
         {%- if woffIndex != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.woff") format("woff")
+            url("{{ cssFontPath }}{{ options.fontFamily }}.woff") format("woff")
             {%- set nothing = formats.splice(woffIndex, 1) -%}
             {%- if formats.length != 0 -%}, {% else -%}; {% endif -%}
         {%- endif -%}
         {%- if ttfIndex != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.ttf") format("truetype")
+            url("{{ cssFontPath }}{{ options.fontFamily }}.ttf") format("truetype")
             {%- set nothing = formats.splice(ttfIndex, 1) -%}
             {%- if formats.length != 0 -%}, {% else -%}; {% endif -%}
         {%- endif -%}
         {%- if svgIndex != -1 -%}
-            url("{{ cssFontPath }}{{ fontName }}.svg#{{ fontName }}") format("svg");
+            url("{{ cssFontPath }}{{ options.fontFamily }}.svg#{{ options.fontFamily }}") format("svg");
         {%- endif %}
     font-style: normal;
     font-weight: 400;
 }
 
-%{{ fontName }} {
+%{{ options.fontFamily }} {
     display: inline-block;
     transform: translate(0, 0);
     text-rendering: auto;
-    font: {{ fontName }};
+    font: {{ options.fontFamily }};
     font-size: inherit;
     font-style: normal;
     -webkit-font-smoothing: antialiased;

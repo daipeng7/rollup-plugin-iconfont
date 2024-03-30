@@ -7,7 +7,7 @@ module.exports = function (result) {
 	options.formats.forEach(format => {
 		const data = result[format];
 		if (data) {
-			const destFilename = path.resolve(options.fontsOutput, `${options.fontName}.${format}`);
+			const destFilename = path.resolve(options.fontsOutput, `${options.fontFamily}.${format}`);
 			fnDatas[destFilename] = data;
 		}
 	});
