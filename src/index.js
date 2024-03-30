@@ -1,7 +1,7 @@
 /*
  * @Author: daipeng7
  * @Date: 2021-07-15 17:01:59
- * @LastEditTime: 2024-03-30 10:23:50
+ * @LastEditTime: 2024-03-30 13:46:17
  * @LastEditors: DaiPeng
  * @Description: iconfont rollup plugin
  */
@@ -22,9 +22,8 @@ module.exports = function rollupPluginIconfont(options = {}) {
 			throw new Error(`Require '${r}' option`);
 		}
 	}
-	options.fontFamily = options.fontName + (options.fontStyle ? '-' + options.fontStyle : '');
 	if (!options.cssOutput) {
-		options.cssOutput = path.resolve(options.fontsOutput, options.fontFamily + '.css');
+		options.cssOutput = path.resolve(options.fontsOutput, options.fontName + '.css');
 	}
 	options = Object.assign({}, defaultOptions, options);
 	const build = (callback) => {
