@@ -1,7 +1,7 @@
 /*
  * @Author: daipeng7
  * @Date: 2021-07-15 17:01:59
- * @LastEditTime: 2024-03-30 13:46:17
+ * @LastEditTime: 2024-05-22 10:50:41
  * @LastEditors: DaiPeng
  * @Description: iconfont rollup plugin
  */
@@ -26,17 +26,14 @@ module.exports = function rollupPluginIconfont(options = {}) {
 		options.cssOutput = path.resolve(options.fontsOutput, options.fontName + '.css');
 	}
 	options = Object.assign({}, defaultOptions, options);
-	const build = (callback) => {
-		return nodify(
-			generate.byGlobby(options).then(result => {
-				return writeFiles(result);
-			}).then(ret => {
-				console.log('iconfont + css have been built with ' + ret.glyphDatas.length + ' svg-icons.');
-				options.success && options.success();
-				return ret;
-			}).catch(console.error.bind(console)),
-			error => callback && callback(error)
-		);
+	const build = () => {
+		return generate.byGlobby(options).then(result => {
+			return writeFiles(result);
+		}).then(ret => {
+			console.log('iconfont + css have been built with ' + ret.glyphDatas.length + ' svg-icons.');
+			options.success && options.success();
+			return ret;
+		}).catch(console.error.bind(console));
 	};
 	const watch = () => {
 		const comileDebounce = thro_debs.debounce(800, build.bind(this));
@@ -67,8 +64,9 @@ module.exports = function rollupPluginIconfont(options = {}) {
 	return {
 		name: 'rollupPluginIconfont',
 		buildStart() {
-			return build().then(() => {
+			return build().then((result) => {
 				options.watch && watch();
+				return result;
 			});
 		}
 	};

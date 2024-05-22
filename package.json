@@ -1,6 +1,6 @@
 {
   "name": "@daipeng7/rollup-plugin-iconfont",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Use svg files to build iconfont files(ttf,woff2,woff,eot,svg), css file, js data file and html-preview file.",
   "author": "daipeng7",
   "license": "ISC",
